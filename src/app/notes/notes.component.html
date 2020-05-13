@@ -1,0 +1,50 @@
+<div class="notes" [ngClass]="{ 'left-panel-open': isLeftPanelOpen }">
+  <div class="overlay" *ngIf="isLeftPanelOpen" (click)="showHideOverlay()"></div>
+  <ul class="side-nav">
+    <li
+      *ngFor="let note of notes | search: searchText; let index = index"
+      (click)="editNote(note, index)"
+      [ngClass]="{ 'active-notes': activeNotesIndex === index }"
+    >
+      <p
+        class="notes-title"
+        [title]="note.title"
+        [innerHTML]="
+          note.title.length > 0
+            ? (note.title | highlight: searchText)
+            : 'New Note'
+        "
+      ></p>
+      <div class="notes-desc">
+        <span class="notes-time">{{ note.date | date: "hh:mm a" }} </span>
+        <span
+          class="notes-for"
+          [title]="note.description"
+          [innerHTML]="note.description | highlight: searchText"
+        >
+        </span>
+      </div>
+    </li>
+  </ul>
+  <div class="main-content">
+    <div class="current-time">
+      {{ currentDate | date: "EEEE, MMMM d, y, h:mm a " }}
+    </div>
+    <textarea
+      rows="2"
+      name="note"
+      class="notes-textarea"
+      placeholder="Type notes"
+      id="textareaInput"
+      (keyup)="onTypeNotes($event)"
+      [(ngModel)]="activeNote.title"
+    ></textarea>
+    <!-- <div class="notes-action">
+      <button class="button" class="btn btn-primary" (click)="addNote()">
+        Add
+      </button>
+      <button class="button" class="btn btn-primary">Edit</button>
+      <button class="button" class="btn btn-secondary">Cancel</button>
+    </div> -->
+  </div>
+</div>

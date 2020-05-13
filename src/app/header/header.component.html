@@ -1,0 +1,65 @@
+<nav
+  [ngClass]="{
+    'mobile-search-hide': !isSearchOpen,
+    'mobile-search-show': isSearchOpen
+  }"
+>
+  <div class="navbar-expand" [style.display]="!isSearchOpen ? 'none' : 'flex'">
+    <i
+      class="fas hamburger"
+      (click)="ExpandCollapse()"
+      [ngClass]="{
+        'fa-bars': !this.isLeftPanelOpen,
+        'fa-times': this.isLeftPanelOpen
+      }"
+    ></i>
+    <div class="brand">
+      <a href="">Logo</a>
+    </div>
+  </div>
+  <div class="search w-m-100">
+    <input
+      type="text"
+      name="search"
+      #search="ngModel"
+      [(ngModel)]="searchText"
+      placeholder="Search"
+      (keyup)="searchNotes(search.value)"
+    />
+    <i
+      class="fas fa-times search-icon clear-search"
+      (click)="hideSearch()"
+      [style.display]="searchText === '' ? 'none' : 'block'"
+    ></i>
+    <i class="fas fa-search search-icon"></i>
+  </div>
+  <ul class="navbar-right" [style.display]="isSearchOpen ? 'flex' : 'none'">
+    <li class="nav-search-icon">
+      <a href="#?"
+        ><i
+          class="fas fa-search icon"
+          (click)="showSearch(); $event.preventDefault()"
+        ></i
+      ></a>
+    </li>
+    <li>
+      <a href="#?"
+        ><i
+          class="fas fa-trash icon"
+          (click)="deleteNote(); $event.preventDefault()"
+        ></i
+      ></a>
+    </li>
+    <li>
+      <a
+        href="#?"
+        (click)="saveNote(); $event.preventDefault()"
+        [ngClass]="{ 'action-disable': isSaveActionDisable }"
+        ><i
+          class="far fa-edit icon"
+          [style.opacity]="isSaveActionDisable ? 0.5 : 1"
+        ></i
+      ></a>
+    </li>
+  </ul>
+</nav>

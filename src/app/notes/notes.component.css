@@ -1,0 +1,120 @@
+.notes {
+  display: var(--display);
+  grid-gap: 15px;
+  height: calc(100vh - 60px);
+}
+
+.notes li {
+  border-bottom: 1px solid #ddd;
+}
+.side-nav {
+  padding: var(--padding);
+  margin: var(--margin);
+  list-style: var(--list-style);
+  width: 250px;
+  background: #fff;
+  border-right: 1px solid #ddd;
+  box-shadow: rgba(0, 0, 0, 0.1) 6px 0px 6px;
+  height: calc(100vh - 60px);
+  overflow: auto;
+  scrollbar-width: thin;
+  position: fixed;
+  margin-left: -250px;
+  transition: var(--transition);
+}
+.side-nav::-webkit-scrollbar {
+  width: 5px;
+  background-color: #ccc;
+}
+.side-nav::-webkit-scrollbar-thumb {
+  background: #3f51b5;
+  border-radius: 10px;
+}
+.side-nav .left-panel-collapse {
+  width: 0;
+}
+.side-nav li {
+  padding: 10px;
+  cursor: pointer;
+}
+.notes-title {
+  margin-bottom: 0;
+  margin-top: 0;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.notes-desc {
+  font-size: 0.9rem;
+}
+
+.active-notes {
+  background: rgba(63, 81, 181, 0.3);
+}
+.main-content {
+  background: #fff;
+  padding: 15px;
+  flex: 1;
+  transition: var(--transition);
+}
+
+.main-content .notes-textarea {
+  width: 100%;
+  border: 0;
+  border-bottom: 1px solid #ddd;
+  font-family: var(--font-family);
+  font-size: 0.9rem;
+  color: inherit;
+}
+.main-content .notes-textarea:focus {
+  outline: none;
+  border-color: #3f51b5;
+  transition: border-color 0.5s ease-out;
+}
+
+.left-panel-open .side-nav {
+  margin: 0;
+  transition: var(--transition);
+}
+.left-panel-open .main-content {
+  padding-left: 265px;
+  transition: var(--transition);
+}
+.current-time {
+  text-align: center;
+  padding: 15px;
+  color: rgba(0, 0, 0, 0.5);
+}
+.notes-action {
+  display: flex;
+  justify-content: flex-end;
+  padding: 15px 5px;
+}
+.notes-action .btn {
+  margin-right: 10px;
+}
+.overlay{
+  display: none;
+}
+
+@media (max-width: 620px) {
+  .left-panel-open .main-content {
+    padding-left: 15px;
+  }
+  .side-nav{
+    width: 320px;
+    margin-left: -320px;
+  }
+  .overlay{
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: rgba(0,0,0,0.5);
+    transition: background-color 0.5s ease-in-out;
+  }
+}
