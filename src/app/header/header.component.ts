@@ -33,6 +33,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     );
     this.isLeftPanelOpenSubscription = this.share.leftPanelOpenClose.subscribe(
       (isOpen: boolean) => {
+        debugger;
         this.isLeftPanelOpen = isOpen;
       }
     );
@@ -61,7 +62,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }
   }
   hideSearch() {
+    debugger;
     this.searchText = '';
+    this.searchNotes(this.searchText);
     if (window.innerWidth < 620) {
       this.isSearchOpen = true;
       this.share.leftPanelOpenClose.emit(!this.isLeftPanelOpen);

@@ -86,7 +86,8 @@ export class NotesComponent implements OnInit, OnDestroy {
   }
 
   showHideOverlay() {
-    if (window.innerWidth < 620) {
+    debugger;
+    if (window.innerWidth < 620 && this.isLeftPanelOpen) {
       this.isLeftPanelOpen = !this.isLeftPanelOpen;
       this.share.leftPanelOpenClose.emit(this.isLeftPanelOpen);
     }
