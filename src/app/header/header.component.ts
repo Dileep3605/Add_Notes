@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ElementRef } from '@angular/core';
 import { ShareService } from '../services/share.service';
 import { RemoteService } from '../services/remote.service';
 import { Notes } from '../notes/notes.model';
@@ -18,7 +18,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
   isLeftPanelOpenSubscription: Subscription;
   isSearchOpen: boolean = true;
   searchText: string = '';
-  constructor(private share: ShareService, private remote: RemoteService) {}
+  constructor(
+    private share: ShareService,
+    private remote: RemoteService,
+    private elementRef: ElementRef
+  ) {}
 
   ngOnInit(): void {
     this.saveActionSubscription = this.share.isSaveDisable.subscribe(
@@ -58,6 +62,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     debugger;
     if (window.innerWidth < 620) {
       this.isSearchOpen = false;
+      this.elementRef.nativeElement.querySelector('#searchTextBox').focus();
       this.share.leftPanelOpenClose.emit(!this.isLeftPanelOpen);
     }
   }

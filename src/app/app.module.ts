@@ -6,10 +6,12 @@ import { HeaderComponent } from './header/header.component';
 import { NotesComponent } from './notes/notes.component';
 import { SearchPipe } from './pipe/search.pipe';
 import { HighlightPipe } from './pipe/highlight.pipe';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [AppComponent, HeaderComponent, NotesComponent, SearchPipe, HighlightPipe],
-  imports: [BrowserModule, FormsModule],
+  imports: [BrowserModule, FormsModule, ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })],
   providers: [],
   bootstrap: [AppComponent],
 })
